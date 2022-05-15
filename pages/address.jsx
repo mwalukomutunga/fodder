@@ -12,7 +12,7 @@ const Address = () => {
                                 <h4 className="mb-4 profile-title">My Addresses</h4>
                                 <div className="custom-control custom-radio px-0 mb-3 position-relative border-custom-radio">
                                     <input type="radio" id="customRadioInline1" name="customRadioInline1"
-                                        className="custom-control-input" checked />
+                                        className="custom-control-input" defaultChecked />
                                     <label className="custom-control-label w-100" for="customRadioInline1">
                                         <div>
                                             <div className="p-3 bg-white rounded shadow-sm w-100">

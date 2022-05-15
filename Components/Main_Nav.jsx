@@ -1,13 +1,17 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 const MainNav = () => {
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  
+  const cart = useSelector((state) => state.cart);
 
-  useEffect(() => {
-    console.log(session);
-  }, [session]);
+  // Reference to the dispatch function from redux store
+
+
+  useEffect(() => {}, [session]);
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== "undefined" && loading) return null;
 
@@ -15,7 +19,12 @@ const MainNav = () => {
     <div className="bg-white shadow-sm osahan-main-nav">
       <nav className="navbar navbar-expand-lg navbar-light bg-white osahan-header py-0 container">
         <a className="navbar-brand mr-0" href="home.html">
-          <img className="img-fluid logo-img " src="img/logo.png" />
+          <img
+            className="img-fluid logo-img"
+           width='100%'
+           height='100%'
+            src="/img/FPSK LOGO.jpg"
+          />
         </a>
         <button
           className="navbar-toggler"
@@ -146,13 +155,14 @@ const MainNav = () => {
               </div>
             </div>
           )}
-
-          <a
-            href="cart.html"
-            className="ml-2 text-dark bg-light rounded-pill p-2 icofont-size border shadow-sm"
-          >
-            <i className="icofont-shopping-cart"></i>
-          </a>
+          <Link href="/cart">
+            <a className="ml-2 text-dark bg-light rounded-pill p-2 icofont-size border shadow-sm">
+              <i className="icofont-shopping-cart"></i>
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {cart.length}
+              </span>
+            </a>
+          </Link>
         </div>
       </nav>
 
@@ -193,11 +203,9 @@ const MainNav = () => {
           </ul>
           <div className="list-unstyled form-inline mb-0 ml-auto">
             {session && (
-            <Link href="post">
-              <a className="text-white px-3 py-2">
-                Upload
-              </a>
-            </Link>
+              <Link href="post">
+                <a className="text-white px-3 py-2">Upload</a>
+              </Link>
             )}
             {!session && (
               <a

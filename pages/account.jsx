@@ -1,6 +1,9 @@
 import AccountNav from "../Components/AccountNav";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Account = () => {
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
   return (
     <section className="py-4 osahan-main-body">
       <div className="container">
@@ -17,7 +20,7 @@ const Account = () => {
                       type="text"
                       className="form-control"
                       id="exampleInputName1"
-                      value="gurdeeposahan"
+                      value={session?.user.name}
                     />
                   </div>
                   <div className="form-group">
@@ -25,8 +28,7 @@ const Account = () => {
                     <input
                       type="number"
                       className="form-control"
-                      id="exampleInputNumber1"
-                      value="1234567890"
+                      value={session?.user.phone}
                     />
                   </div>
                   <div className="form-group">
@@ -34,8 +36,7 @@ const Account = () => {
                     <input
                       type="email"
                       className="form-control"
-                      id="exampleInputEmail1"
-                      value="iamosahan@gmail.com"
+                      value={session?.user.email}
                     />
                   </div>
                   <div className="text-center">

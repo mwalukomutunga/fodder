@@ -16,7 +16,7 @@ providers: [
     },
     async authorize(credentials, req) {
       // Add logic here to look up the user from the credentials supplied
-      return await fetch("http://localhost:15101/api/token", {
+      return await fetch("http://localhost:7065/api/token", {
         method: 'POST',
         body: JSON.stringify(credentials),
         headers: { "Content-Type": "application/json" }

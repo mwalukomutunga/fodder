@@ -1,13 +1,24 @@
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
+
 const AccountNav = () => {
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+
+
+//   useEffect(() => {
+    
+// }, [session]);
+// When rendering client side don't display anything until loading is complete
+if (typeof window !== "undefined" && loading) return null;
     return (  
         <div className="col-lg-4">
         <div className="osahan-account bg-white rounded shadow-sm overflow-hidden">
             <div className="p-4 profile text-center border-bottom">
                 <img src="img/user.png" className="img-fluid rounded-pill"/>
-                <h6 className="font-weight-bold m-0 mt-2">gurdeeposahan</h6>
+                <h6 className="font-weight-bold m-0 mt-2">{session?.user.name}</h6>
                 <p className="small text-muted m-0"><a
-                        href="https://askbootstrap.com/cdn-cgi/l/email-protection" className="__cf_email__"
+                        className="__cf_email__"
                         data-cfemail="5e373f33312d3f363f301e39333f3732703d3133">[email&#160;protected]</a>
                 </p>
             </div>
