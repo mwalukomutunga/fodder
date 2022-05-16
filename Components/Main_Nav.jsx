@@ -18,7 +18,8 @@ const MainNav = () => {
   return (
     <div className="bg-white shadow-sm osahan-main-nav">
       <nav className="navbar navbar-expand-lg navbar-light bg-white osahan-header py-0 container">
-        <a className="navbar-brand mr-0" href="home.html">
+      <Link href="/">
+      <a className="navbar-brand mr-0" >
           <img
             className="img-fluid logo-img"
            width='100%'
@@ -26,6 +27,7 @@ const MainNav = () => {
             src="/img/FPSK LOGO.jpg"
           />
         </a>
+      </Link>
         <button
           className="navbar-toggler"
           type="button"

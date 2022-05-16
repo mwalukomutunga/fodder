@@ -29,12 +29,12 @@ const Cart = () => {
   }, [session]);
 
   let total = cart.reduce(
-    (accumulator, post) => post.unitPrice * post.quantity,
+    (accumulator, post) => (post.unitPrice * post.quantity)+accumulator,
     0
   );
   let discounted = cart.reduce(
-    (accumulator, post) =>
-      post.unitPrice * ((100 - post.discount) / 100) * post.quantity,
+    (accumulator, post) =>accumulator+
+     (post.unitPrice * ((100 - post.discount) / 100) * post.quantity),
     0
   );
 
@@ -43,7 +43,7 @@ const Cart = () => {
     signIn();
   }
   const HandleSubmit = () => {
-    requests.post("Address", inputs).then(res =>{
+    requests.put("Address", inputs).then(res =>{
       setAddress(res)
       alert('added')
     });
@@ -122,7 +122,7 @@ const Cart = () => {
                                   <p className="total_price font-weight-bold m-0">
                                     {post.address}
                                     <hr />
-                                    Seller -{session?.user.name} <br />
+                                    Seller - {session?.user.name} <br />
                                     Free transport:{" "}
                                     {post.freeTransport.toString()}
                                   </p>
@@ -133,13 +133,13 @@ const Cart = () => {
                                       className="qtyminus btn btn-success btn-sm"
                                       field="quantity"
                                       onClick={() =>
-                                        dispatch(decrementQuantity(post.Id))
+                                        dispatch(decrementQuantity(post.id))
                                       }
                                     />
                                     <input
                                       type="text"
                                       name="quantity"
-                                      value={post.quantity}
+                                      value={cart.find((x) => x.id == post.id)?.quantity}
                                       className="qty form-control"
                                     />
                                     <input
@@ -148,7 +148,7 @@ const Cart = () => {
                                       className="qtyplus btn btn-success btn-sm"
                                       field="quantity"
                                       onClick={() =>
-                                        dispatch(incrementQuantity(post.Id))
+                                        dispatch(incrementQuantity(post.id))
                                       }
                                     />
                                   </form>
@@ -277,8 +277,8 @@ const Cart = () => {
                 <div className="bg-white rounded overflow-hidden shadow-sm mb-3 checkout-sidebar">
                   <div className="d-flex align-items-center osahan-cart-item-profile border-bottom bg-white p-3">
                     <img
-                      alt="osahan"
-                      src="img/starter1.jpg"
+                      alt="osahan"                     
+                      src="/img/FPSK LOGO.jpg"
                       className="mr-3 rounded-circle img-fluid"
                     />
                     <div className="d-flex flex-column">

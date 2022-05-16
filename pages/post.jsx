@@ -2,6 +2,7 @@ import SignUpNav from "../Components/SignupNav";
 import { useState } from "react";
 import requests from "../agent";
 import { useRouter } from "next/router";
+import Select from "react-select";
 
 const Post = () => {
   var router = useRouter();
@@ -16,7 +17,7 @@ const Post = () => {
     unitPrice: 2000,
     discount: 10,
     freeTransport: true,
-    paths: ["img/fodder-unsplash.jpg"]
+    paths: ["img/fodder-unsplash.jpg"],
   });
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +25,24 @@ const Post = () => {
     router.push("/");
   };
 
+   const colourOptions = [
+    { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
+    { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
+    { value: 'purple', label: 'Purple', color: '#5243AA' },
+    { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
+    { value: 'orange', label: 'Orange', color: '#FF8B00' },
+    { value: 'yellow', label: 'Yellow', color: '#FFC400' },
+    { value: 'green', label: 'Green', color: '#36B37E' },
+    { value: 'forest', label: 'Forest', color: '#00875A' },
+    { value: 'slate', label: 'Slate', color: '#253858' },
+    { value: 'silver', label: 'Silver', color: '#666666' },
+  ];
+  const typeOptions = [
+    { value: 'bales', label: 'Bales', },
+    { value: 'kg', label: 'Kg',},
+    { value: 'fodder', label: 'Fodder',},
+   
+  ];
   const handleInputChange = (event) => {
     event.persist();
     const target = event.target;
@@ -40,9 +59,9 @@ const Post = () => {
     // }
     const formData = new FormData();
 
-		formData.append('files', files[0]);
-     for (var x = 1; x < files.length; x++) {
-      formData.append('files', files[0]);
+    formData.append("files", files[0]);
+    for (var x = 1; x < files.length; x++) {
+      formData.append("files", files[0]);
     }
     requests.post("/uploads", formData).then((res) => {
       setInputs((inputs) => ({ ...inputs, paths: res.paths }));
@@ -81,17 +100,7 @@ const Post = () => {
                       onChange={handleInputChange}
                     />
                   </div> */}
-                  {/* <div className="form-group">
-                    <label>User Type</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="userType"
-                      required
-                      value={inputs.userType}
-                      onChange={handleInputChange}
-                    />
-                  </div> */}
+                 
                   <div className="form-group">
                     <label>Home Address</label>
                     <input
@@ -147,7 +156,7 @@ const Post = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label>Uom</label>
                     <input
                       type="text"
@@ -157,6 +166,19 @@ const Post = () => {
                       value={inputs.uom}
                       onChange={handleInputChange}
                     />
+                  </div> */}
+                   <div className="form-group">
+                    <label>Uom</label>
+                    <Select
+                      isDisabled={false}
+                      isLoading={false}
+                      isClearable={true}
+                      defaultValue={typeOptions[0]}
+                      isSearchable={true}
+                      name="uom"
+                      onChange={(e)=> setInputs((inputs) => ({ ...inputs, uom: e.value }))}
+                      options={typeOptions}
+                    />                 
                   </div>
                   <div className="form-group">
                     <label>Unit Price</label>
