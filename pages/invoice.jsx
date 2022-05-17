@@ -6,6 +6,7 @@ const Invoice = () => {
     <link rel="stylesheet" type="text/css" href="/css/invoice.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     </Head>
+     <div className="container">
       <table class="body-wrap">
         <tbody>
           <tr>
@@ -118,6 +119,7 @@ const Invoice = () => {
           </tr>
         </tbody>
       </table>
+      </div>
     </>
   );
 };

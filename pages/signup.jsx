@@ -1,11 +1,15 @@
 import SignUpNav from "../Components/SignupNav";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import requests from "../agent";
 import { useRouter } from "next/router";
 import {  signIn } from "next-auth/react";
+import Select from "react-select";
 
 const SignUp = () => {
     var router =useRouter();
+    const [counties, setCounties] = useState([]);
+    const [subCounties, setSubCounties] = useState([]);
+    const [wards, setWards] = useState([]);
     const [inputs, setInputs] = useState({
         address:"Nairobi, Kenya",
         fullname:"Stephen Stephen",
@@ -34,13 +38,70 @@ const SignUp = () => {
        }
         
   };
-
+  useEffect(() => {
+    requests.get("Administration").then((res) => {
+      setCounties(res);
+    });
+  }, []);
   const handleInputChange = (event) => {
     event.persist();
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
+  };
+
+  
+  const typeOptions = [
+    { value: "Seller", label: "Seller" },
+    { value: "Buyer", label: "Buyer" },
+    { value: "Transporter", label: "Transporter" },
+  ];
+
+  let countyOptions = new Set();
+  let countystr = new Set();
+  const calcCounties = counties.map((item, index) => {
+    if (!countystr.has(item.county)) {
+      countystr.add(item.county);
+      countyOptions.add({ value: item.county, label: item.county });
+    }
+  });
+  const handleCounty = (e) => {
+    setInputs((inputs) => ({ ...inputs, county: e.value }));
+
+    let subcountyOptions = new Set();
+    let subcountystr = new Set();
+    counties
+      .filter((x) => x.county == e.value)
+      .map((item, index) => {
+        if (!subcountystr.has(item.subCounty)) {
+          subcountystr.add(item.subCounty);
+          subcountyOptions.add({
+            value: item.subCounty,
+            label: item.subCounty,
+          });
+        }
+      });
+    setSubCounties(Array.from(subcountyOptions));
+  };
+
+  const handleSubCounty = (e) => {
+    setInputs((inputs) => ({ ...inputs, subCounty: e.value }));
+
+    let wardOptions = new Set();
+    let wardstr = new Set();
+    counties
+      .filter((x) => x.subCounty == e.value)
+      .map((item, index) => {
+        if (!wardstr.has(item.ward)) {
+          wardstr.add(item.ward);
+          wardOptions.add({
+            value: item.ward,
+            label: item.ward,
+          });
+        }
+      });
+      setWards(Array.from(wardOptions));
   };
 
   return (
@@ -77,7 +138,7 @@ const SignUp = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label>User Type</label>
                     <input
                       type="text"
@@ -86,6 +147,21 @@ const SignUp = () => {
                       required
                       value={inputs.userType}
                       onChange={handleInputChange}
+                    />
+                  </div> */}
+                   <div className="form-group">
+                    <label>User Type</label>
+                    <Select
+                      isDisabled={false}
+                      isLoading={false}
+                      isClearable={true}
+                      defaultValue={typeOptions[0]}
+                      isSearchable={true}
+                      name="userType"
+                      onChange={(e) =>
+                        setInputs((inputs) => ({ ...inputs, userType: e.value }))
+                      }
+                      options={typeOptions}
                     />
                   </div>
                   <div className="form-group">
@@ -100,38 +176,44 @@ const SignUp = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label>County</label>
-                    <input
-                      type="text"
-                      className="form-control"
+                    <label>County </label>
+                    <Select
+                      isDisabled={false}
+                      isLoading={false}
+                      isClearable={true}
+                      defaultValue={Array.from(countyOptions)[0]}
+                      isSearchable={true}
                       name="county"
-                            required
-                            value={inputs.county}
-                            onChange={handleInputChange}
+                      onChange={(e) => handleCounty(e)}
+                      options={Array.from(countyOptions)}
                     />
                   </div>
                   <div className="form-group">
-                    <label>Sub County</label>
-                    <input
-                      type="text"
-                      className="form-control"                     
+                    <label>Sub County </label>
+                    <Select
+                      isDisabled={false}
+                      isLoading={false}
+                      isClearable={true}
+                      defaultValue={subCounties[0]}
+                      isSearchable={true}
                       name="subCounty"
-                      required
-                      value={inputs.subCounty}
-                      onChange={handleInputChange}
+                      onChange={(e) => handleSubCounty(e)}
+                      options={subCounties}
                     />
                   </div>
                   <div className="form-group">
-                    <label>Ward</label>
-                    <input
-                      type="text"
-                      className="form-control"                     
-                      name="ward"
-                      required
-                      value={inputs.ward}
-                      onChange={handleInputChange}
+                    <label>Ward </label>
+                    <Select
+                      isDisabled={false}
+                      isLoading={false}
+                      isClearable={true}
+                      defaultValue={subCounties[0]}
+                      isSearchable={true}
+                      name="subCounty"
+                      onChange={(e)=> setInputs((inputs) => ({ ...inputs, ward: e.value }))}
+                      options={wards}
                     />
-                  </div>
+                  </div> 
                   <div className="form-group">
                     <label>Password</label>
                     <input
