@@ -17,16 +17,30 @@ if (typeof window !== "undefined" && loading) return null;
             <div className="p-4 profile text-center border-bottom">
                 <img src="img/user.png" className="img-fluid rounded-pill"/>
                 <h6 className="font-weight-bold m-0 mt-2">{session?.user.name}</h6>
-                <p className="small text-muted m-0"><a
+                {/* <p className="small text-muted m-0"><a
                         className="__cf_email__"
                         data-cfemail="5e373f33312d3f363f301e39333f3732703d3133">[email&#160;protected]</a>
-                </p>
+                </p> */}
             </div>
             <div className="account-sections">
                 <ul className="list-group">
                     <Link href="account" className="text-decoration-none text-dark">
                         <li className="border-bottom bg-white d-flex align-items-center p-3">
                             <i className="icofont-user osahan-icofont bg-danger"></i>My Account
+                            <span className="badge badge-success p-1 badge-pill ml-auto"><i
+                                    className="icofont-simple-right"></i></span>
+                        </li>
+                    </Link>
+                    <Link href="listing" className="text-decoration-none text-dark">
+                        <li className="border-bottom bg-white d-flex align-items-center p-3">
+                            <i className="icofont-user osahan-icofont bg-danger"></i>My Listing
+                            <span className="badge badge-success p-1 badge-pill ml-auto"><i
+                                    className="icofont-simple-right"></i></span>
+                        </li>
+                    </Link>
+                    <Link href="post" className="text-decoration-none text-dark">
+                        <li className="border-bottom bg-white d-flex align-items-center p-3">
+                            <i className="icofont-user osahan-icofont bg-danger"></i>Upload Fodder
                             <span className="badge badge-success p-1 badge-pill ml-auto"><i
                                     className="icofont-simple-right"></i></span>
                         </li>

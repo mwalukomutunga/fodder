@@ -1,9 +1,29 @@
 import AccountNav from "../Components/AccountNav";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useSession, signIn } from "next-auth/react";
+import { useSelector, useDispatch } from "react-redux";
+import Link from "next/link";
+import requests from "../agent";
 
 const Account = () => {
+  const [address,setAddress] = useState({});
+  const [inputs, setInputs] = useState();
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    requests.get("location/" + session?.user.name).then((res) => {
+      setAddress(res)
+    });
+    setInputs((inputs) => ({ ...inputs, name:session?.user.name,phone:session?.user.name}));
+    // setInputs({...inputs},{name:session?.user.name,phone:session?.user.name})
+  }, [session]);
+
+  if (typeof window !== "undefined" && loading) return null;
+  if (!session) {
+    signIn();
+  }
   return (
     <section className="py-4 osahan-main-body">
       <div className="container">
@@ -28,15 +48,15 @@ const Account = () => {
                     <input
                       type="number"
                       className="form-control"
-                      value={session?.user.phone}
+                      value={address?.phone}
                     />
                   </div>
                   <div className="form-group">
-                    <label>Email</label>
+                    <label>Address</label>
                     <input
                       type="email"
                       className="form-control"
-                      value={session?.user.email}
+                      value={address?.homeAddress}
                     />
                   </div>
                   <div className="text-center">
@@ -51,22 +71,25 @@ const Account = () => {
               </div>
               <div className="additional mt-3">
                 <div className="change_password mb-1">
-                  <a
-                    href="change_password.html"
+                 <Link  href="/changepassword">
+                 <a
+                   
                     className="p-3 btn-light border btn d-flex align-items-center"
                   >
                     Change Password
                     <i className="icofont-rounded-right ml-auto"></i>
                   </a>
+                 </Link>
                 </div>
                 <div className="deactivate_account">
-                  <a
-                    href="deactivate_account.html"
+                 <Link  href="/deactivate">
+                 <a
                     className="p-3 btn-light border btn d-flex align-items-center"
                   >
                     Deactivate Account
                     <i className="icofont-rounded-right ml-auto"></i>
                   </a>
+                 </Link>
                 </div>
               </div>
             </div>

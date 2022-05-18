@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import requests from "../agent";
 import { useRouter } from "next/router";
 import Select from "react-select";
+import AccountNav from "../Components/AccountNav";
 
 const Post = () => {
   var router = useRouter();
@@ -113,7 +114,7 @@ const Post = () => {
     <section className="py-4 osahan-main-body">
       <div className="container">
         <div className="row">
-          <SignUpNav />
+          <AccountNav/>
           <div className="col-lg-8 p-4 bg-white rounded shadow-sm">
             <h4 className="mb-4 profile-title">Upload your fodders</h4>
             <div id="edit_profile">

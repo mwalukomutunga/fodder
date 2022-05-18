@@ -3,7 +3,6 @@ import { useSession,signIn } from "next-auth/react";
 
 
 const Success = () => {
-
     const { data: session, status } = useSession();
     const loading = status === "loading";
     

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import requests from "../../agent";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useSession, signIn } from "next-auth/react";
 import {
   addToCart,
   incrementQuantity,
@@ -10,11 +11,17 @@ import {
 import Link from "next/link";
 
 const ProductDetails = () => {
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
   const router = useRouter();
   const [post, setPost] = useState({});
   const { pid } = router.query;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+
+
+  
+ 
 
   useEffect(() => {
     requests.get(`/posts/${pid}`).then((res) => {
@@ -26,7 +33,10 @@ const ProductDetails = () => {
     dispatch(addToCart(post));
     router.push("/cart");
   };
-
+  if (typeof window !== "undefined" && loading) return null;
+  if (!session) {
+    signIn();
+  }
   return (
     <>
       <nav aria-label="breadcrumb" className="breadcrumb mb-0">

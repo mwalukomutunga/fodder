@@ -14,10 +14,9 @@ export default function Home() {
   useEffect(() => {
     requests.get("/posts").then((res) => {
       setPosts(res);
-    });
-    if (typeof window !== "undefined" && loading) return null;
+    });   
   }, []);
- 
+  if (typeof window !== "undefined" && loading) return null;
   // If no session exists, display access denied message
   //   if (!session) {
   //     return (
