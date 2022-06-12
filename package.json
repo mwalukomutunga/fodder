@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export -o outdir",
+    "export": "next export -o outdir",
     "start": "next start",
     "lint": "next lint"
   },

@@ -8,9 +8,9 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
-  useEffect(() => {
-    if (typeof window !== "undefined") return null;
-  }, []);
+  // useEffect(() => {
+  //   if (!window) return null;
+  // }, []);
   return (
     <SessionProvider
       session={session}
