@@ -10,12 +10,12 @@ const AccountNav = () => {
     
 // }, [session]);
 // When rendering client side don't display anything until loading is complete
-if (typeof window !== "undefined" && loading) return null;
+// if (typeof window !== "undefined" && loading) return null;
     return (  
         <div className="col-lg-4">
         <div className="osahan-account bg-white rounded shadow-sm overflow-hidden">
             <div className="p-4 profile text-center border-bottom">
-                <img src="img/user.png" className="img-fluid rounded-pill"/>
+                <img src="/img/user.png" className="img-fluid rounded-pill"/>
                 <h6 className="font-weight-bold m-0 mt-2">{session?.user.name}</h6>
                 {/* <p className="small text-muted m-0"><a
                         className="__cf_email__"
@@ -41,6 +41,13 @@ if (typeof window !== "undefined" && loading) return null;
                     <Link href="post" className="text-decoration-none text-dark">
                         <li className="border-bottom bg-white d-flex align-items-center p-3">
                             <i className="icofont-user osahan-icofont bg-danger"></i>Upload Fodder
+                            <span className="badge badge-success p-1 badge-pill ml-auto"><i
+                                    className="icofont-simple-right"></i></span>
+                        </li>
+                    </Link>
+                    <Link href="myorders" className="text-decoration-none text-dark">
+                        <li className="border-bottom bg-white d-flex align-items-center p-3">
+                            <i className="icofont-user osahan-icofont bg-danger"></i>My Orders
                             <span className="badge badge-success p-1 badge-pill ml-auto"><i
                                     className="icofont-simple-right"></i></span>
                         </li>

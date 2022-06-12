@@ -19,10 +19,6 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-
-  
- 
-
   useEffect(() => {
     requests.get(`/posts/${pid}`).then((res) => {
       setPost(res);
@@ -33,10 +29,10 @@ const ProductDetails = () => {
     dispatch(addToCart(post));
     router.push("/cart");
   };
-  if (typeof window !== "undefined" && loading) return null;
-  if (!session) {
-    signIn();
-  }
+  // if (typeof window !== "undefined" && loading) return null;
+  // if (!session) {
+  //   signIn();
+  // }
   return (
     <>
       <nav aria-label="breadcrumb" className="breadcrumb mb-0">
@@ -62,7 +58,7 @@ const ProductDetails = () => {
               <div className="recommend-slider mb-3">
                 {post.paths?.map((item, index) => (
                   <div key={index} className="osahan-slider-item">
-                    <img
+                    <img                    
                       src={item}
                       className="img-fluid mx-auto shadow-sm rounded"
                       alt="Responsive image"

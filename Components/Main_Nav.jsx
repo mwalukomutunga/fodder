@@ -13,7 +13,7 @@ const MainNav = () => {
 
   useEffect(() => {}, [session]);
   // When rendering client side don't display anything until loading is complete
-  if (typeof window !== "undefined" && loading) return null;
+  // if (typeof window !== "undefined" && loading) return null;
 
   return (
     <div className="bg-white shadow-sm osahan-main-nav">
@@ -123,8 +123,8 @@ const MainNav = () => {
                 </a> */}
           {session && (
             <div className="dropdown mr-3">
-              <a
-                href="/"
+             <Link href="/">
+             <a                
                 className="dropdown-toggle text-dark"
                 id="dropdownMenuButton"
                 data-toggle="dropdown"
@@ -132,11 +132,12 @@ const MainNav = () => {
                 aria-expanded="false"
               >
                 <img
-                  src="img/user.png"
+                  src="/img/user.png"
                   className="img-fluid rounded-circle header-user mr-2"
                 />
                 Hi {session?.user.name}
               </a>
+             </Link>
               <div
                 className="dropdown-menu dropdown-menu-right top-profile-drop"
                 aria-labelledby="dropdownMenuButton"
@@ -177,30 +178,34 @@ const MainNav = () => {
               </a>
             </li>
 
-            <li className="nav-item active">
+            {/* <li className="nav-item active">
               <a className="nav-link text-white pl-0" href="/myorders">
                 My Orders{" "}
               </a>
-            </li>
+            </li> */}
             <li className="nav-item active">
               <a className="nav-link text-white pl-0" href="/account">
-                Account{" "}
+                Account
               </a>
             </li>
             <li className="nav-item active">
               <a className="nav-link text-white pl-0" href="/address">
-                Address{" "}
+                Address
               </a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link text-white pl-0" href="/cart">
-                Cart{" "}
+              <Link  href="/cart">
+              <a className="nav-link text-white pl-0">
+                Cart
               </a>
+              </Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link text-white pl-0" href="/checkout">
-                Checkout{" "}
+              <Link href="/checkout">
+              <a className="nav-link text-white pl-0" >
+                Checkout
               </a>
+              </Link>
             </li>
           </ul>
           <div className="list-unstyled form-inline mb-0 ml-auto">
@@ -210,13 +215,14 @@ const MainNav = () => {
               </Link>
             )}
             {!session && (
-              <a
-                href="picks_today.html"
+              <Link  href="picks_today.html">
+                <a               
                 onClick={() => signIn()}
                 className="text-white px-3 py-2"
               >
                 Login
               </a>
+              </Link>
             )}
             {!session && (
               <Link href="/signup">
@@ -224,13 +230,14 @@ const MainNav = () => {
               </Link>
             )}
             {session && (
-              <a
-                href="promos.html"
+             <Link href="promos.html">
+               <a                
                 onClick={() => signOut()}
                 className="text-white px-3 py-2"
               >
                 <i></i>logout
               </a>
+             </Link>
             )}
           </div>
         </div>

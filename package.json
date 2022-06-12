@@ -10,6 +10,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.27.2",
+    "devextreme": "21.2.8",
+    "devextreme-react": "21.2.8",
     "next": "12.0.7",
     "next-auth": "^4.3.4",
     "react": "17.0.2",

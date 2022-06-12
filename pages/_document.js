@@ -23,7 +23,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head />
-        <body  className="fixed-bottom-padding">
+        <body  className="dx-viewport fixed-bottom-padding">
           <Main />
           <NextScript />
           <script 

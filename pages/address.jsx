@@ -19,7 +19,7 @@ const Address = () => {
      // setInputs({...inputs},{name:session?.user.name,phone:session?.user.name})
    }, [session]);
 
-   if (typeof window !== "undefined" && loading) return null;
+//    if (typeof window !== "undefined" && loading) return null;
    if (!session) {
      signIn();
    }

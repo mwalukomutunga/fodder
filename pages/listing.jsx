@@ -11,11 +11,11 @@ const Listing = () => {
   const loading = status === "loading";
   useEffect(() => {
     requests.get("/posts").then((res) => {
-      setPosts(res);
+      setPosts(res.slice(1, 3));
     });
   }, []);
 
-  if (typeof window !== "undefined" && loading) return null;
+  // if (typeof window !== "undefined" && loading) return null;
   if (!session) {
     signIn();
   }

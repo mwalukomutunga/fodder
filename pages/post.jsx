@@ -32,6 +32,7 @@ const Post = () => {
     requests.get("Administration").then((res) => {
       setCounties(res);
     });
+    // setInputs((inputs) => ({ ...inputs, name:session?.user.name,phone:session?.user.name}));
   }, []);
 
   const typeOptions = [

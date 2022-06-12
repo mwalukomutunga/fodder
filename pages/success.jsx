@@ -6,7 +6,7 @@ const Success = () => {
     const { data: session, status } = useSession();
     const loading = status === "loading";
     
-  if (typeof window !== "undefined" && loading) return null;
+  // if (typeof window !== "undefined" && loading) return null;
   if (!session) {
   signIn();
 }

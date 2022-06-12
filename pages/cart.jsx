@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from 'next/router'
 import {
   incrementQuantity,
   decrementQuantity,
@@ -18,6 +19,7 @@ const Cart = () => {
    const [inputs, setInputs] = useState();
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  const router = useRouter();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,14 +40,14 @@ const Cart = () => {
     0
   );
 
-  if (typeof window !== "undefined" && loading) return null;
+  // if (typeof window !== "undefined" && loading) return null;
   if (!session) {
     signIn();
   }
   const HandleSubmit = () => {
     requests.put("Address", inputs).then(res =>{
       setAddress(res)
-      alert('added')
+     router.reload();
     });
   };
   const handleInputChange = (event) => {
