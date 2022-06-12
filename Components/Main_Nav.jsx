@@ -1,33 +1,31 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 const MainNav = () => {
   const { data: session, status } = useSession();
   const loading = status === "loading";
-  
+
   const cart = useSelector((state) => state.cart);
 
   // Reference to the dispatch function from redux store
 
-
   useEffect(() => {}, [session]);
   // When rendering client side don't display anything until loading is complete
-  // if (typeof window !== "undefined" && loading) return null;
 
   return (
     <div className="bg-white shadow-sm osahan-main-nav">
       <nav className="navbar navbar-expand-lg navbar-light bg-white osahan-header py-0 container">
-      <Link href="/">
-      <a className="navbar-brand mr-0" >
-          <img
-            className="img-fluid logo-img"
-           width='100%'
-           height='100%'
-            src="/img/FPSK LOGO.jpg"
-          />
-        </a>
-      </Link>
+        <Link href="/">
+          <a className="navbar-brand mr-0">
+            <img
+              className="img-fluid logo-img"
+              width="100%"
+              height="100%"
+              src="/img/FPSK LOGO.jpg"
+            />
+          </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -41,23 +39,24 @@ const MainNav = () => {
         </button>
         <div className="ml-3 d-flex align-items-center">
           <div className="dropdown mr-3">
-            <a
-              className="text-dark dropdown-toggle d-flex align-items-center osahan-location-drop"
-              href="listing.html#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <div>
-                <i className="icofont-location-pin d-flex align-items-center bg-light rounded-pill p-2 icofont-size border shadow-sm mr-2"></i>
-              </div>
-              <div>
-                <p className="text-muted mb-0 small">Select Location</p>
-                Counties kenya
-              </div>
-            </a>
+            <Link href="#">
+              <a
+                className="text-dark dropdown-toggle d-flex align-items-center osahan-location-drop"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <div>
+                  <i className="icofont-location-pin d-flex align-items-center bg-light rounded-pill p-2 icofont-size border shadow-sm mr-2"></i>
+                </div>
+                <div>
+                  <p className="text-muted mb-0 small">Select Location</p>
+                  Counties kenya
+                </div>
+              </a>
+            </Link>
             <div
               className="dropdown-menu osahan-select-loaction p-3"
               aria-labelledby="navbarDropdown"
@@ -80,24 +79,28 @@ const MainNav = () => {
               <div className="city pt-2">
                 <h6>Top Counties</h6>
                 <p className="border-bottom m-0 py-1">
-                  <a href="listing.html#" className="text-dark">
-                    Migori
-                  </a>
+                  <Link href="#">
+                    <a className="text-dark">Migori</a>
+                  </Link>
                 </p>
                 <p className="border-bottom m-0 py-1">
-                  <a href="listing.html#" className="text-dark">
-                    Makueni
-                  </a>
+                  <Link href="#">
+                    <a className="text-dark">Makueni</a>
+                  </Link>
                 </p>
                 <p className="border-bottom m-0 py-1">
-                  <a href="listing.html#" className="text-dark">
+                  <Link href="#">
+                  <a  className="text-dark">
                     Kitui
                   </a>
+                  </Link>
                 </p>
                 <p className="m-0 py-1">
-                  <a href="listing.html#" className="text-dark">
+                  <Link href="#">
+                  <a  className="text-dark">
                     Homa bay
                   </a>
+                  </Link>
                 </p>
               </div>
             </div>
@@ -123,38 +126,42 @@ const MainNav = () => {
                 </a> */}
           {session && (
             <div className="dropdown mr-3">
-             <Link href="/">
-             <a                
-                className="dropdown-toggle text-dark"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <img
-                  src="/img/user.png"
-                  className="img-fluid rounded-circle header-user mr-2"
-                />
-                Hi {session?.user.name}
-              </a>
-             </Link>
+              <Link href="/">
+                <a
+                  className="dropdown-toggle text-dark"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="/img/user.png"
+                    className="img-fluid rounded-circle header-user mr-2"
+                  />
+                  Hi {session?.user.name}
+                </a>
+              </Link>
               <div
                 className="dropdown-menu dropdown-menu-right top-profile-drop"
                 aria-labelledby="dropdownMenuButton"
               >
-                <a className="dropdown-item" href="/account">
+                <Link href="/account">
+                <a className="dropdown-item" >
                   My account
                 </a>
+                </Link>
                 {/* <a className="dropdown-item" onClick={() => signIn()} href="signin.html">Sign In</a>
                         <a className="dropdown-item"  onClick={() => signOut()} href="signin.html">Register</a> */}
 
-                <a
+               <Link href="">
+               <a
                   className="dropdown-item"
                   onClick={() => signOut()}
-                  href="signin.html"
+                  
                 >
                   Logout
                 </a>
+               </Link>
               </div>
             </div>
           )}
@@ -173,9 +180,11 @@ const MainNav = () => {
         <div className="container menu-bar d-flex align-items-center">
           <ul className="list-unstyled form-inline mb-0">
             <li className="nav-item active">
-              <a className="nav-link text-white pl-0" href="/">
+             <Link  href="/">
+             <a className="nav-link text-white pl-0">
                 Home <span className="sr-only">(current)</span>
               </a>
+             </Link>
             </li>
 
             {/* <li className="nav-item active">
@@ -184,27 +193,27 @@ const MainNav = () => {
               </a>
             </li> */}
             <li className="nav-item active">
-              <a className="nav-link text-white pl-0" href="/account">
+             <Link href="/account">
+             <a className="nav-link text-white pl-0" >
                 Account
               </a>
+             </Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link text-white pl-0" href="/address">
+              <Link href="/address">
+              <a className="nav-link text-white pl-0" >
                 Address
-              </a>
-            </li>
-            <li className="nav-item active">
-              <Link  href="/cart">
-              <a className="nav-link text-white pl-0">
-                Cart
               </a>
               </Link>
             </li>
             <li className="nav-item active">
+              <Link href="/cart">
+                <a className="nav-link text-white pl-0">Cart</a>
+              </Link>
+            </li>
+            <li className="nav-item active">
               <Link href="/checkout">
-              <a className="nav-link text-white pl-0" >
-                Checkout
-              </a>
+                <a className="nav-link text-white pl-0">Checkout</a>
               </Link>
             </li>
           </ul>
@@ -215,13 +224,10 @@ const MainNav = () => {
               </Link>
             )}
             {!session && (
-              <Link  href="picks_today.html">
-                <a               
-                onClick={() => signIn()}
-                className="text-white px-3 py-2"
-              >
-                Login
-              </a>
+              <Link href="picks_today.html">
+                <a onClick={() => signIn()} className="text-white px-3 py-2">
+                  Login
+                </a>
               </Link>
             )}
             {!session && (
@@ -230,14 +236,11 @@ const MainNav = () => {
               </Link>
             )}
             {session && (
-             <Link href="promos.html">
-               <a                
-                onClick={() => signOut()}
-                className="text-white px-3 py-2"
-              >
-                <i></i>logout
-              </a>
-             </Link>
+              <Link href="promos.html">
+                <a onClick={() => signOut()} className="text-white px-3 py-2">
+                  <i></i>logout
+                </a>
+              </Link>
             )}
           </div>
         </div>

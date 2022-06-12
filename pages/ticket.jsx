@@ -12,17 +12,17 @@ const Ticket = () => {
                         <div className="p-0">
                             <form action="help_ticket.html">
                                 <div className="form-group">
-                                    <label for="exampleInputName1">Full Name</label>
+                                    <label htmlFor="exampleInputName1">Full Name</label>
                                     <input type="text" placeholder="Enter Full Name" className="form-control"
                                         />
                                 </div>
                                 <div className="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
+                                    <label htmlFor="exampleInputEmail1">Email</label>
                                     <input type="email" placeholder="Enter Email" className="form-control"
                                         aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="form-group">
-                                    <label for="exampleInputPassword1">How can we improve</label>
+                                    <label htmlFor="exampleInputPassword1">How can we improve</label>
                                     <input type="text" placeholder="can we improve?" className="form-control"
                                         />
                                 </div>

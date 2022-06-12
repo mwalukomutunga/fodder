@@ -90,7 +90,7 @@ const Login = () => {
                     <p className="text-center mt-3 mb-0">
                       {" "}
                       <a className="text-dark">
-                        Don't have an account? Sign up
+                        Dont have an account? Sign up
                       </a>
                     </p>
                   </div>
@@ -104,7 +104,7 @@ const Login = () => {
               >
                 <div className="osahan-signup bg-white p-4">
                   <div className="p-2">
-                    <h2 className="my-0">Let's get started</h2>
+                    <h2 className="my-0">Lets get started</h2>
                     <p className="small mb-4">
                       Create account to see our top picks for you!
                     </p>

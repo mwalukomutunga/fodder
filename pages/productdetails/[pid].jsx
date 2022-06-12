@@ -29,7 +29,7 @@ const ProductDetails = () => {
     dispatch(addToCart(post));
     router.push("/cart");
   };
-  // if (typeof window !== "undefined" && loading) return null;
+  
   // if (!session) {
   //   signIn();
   // }

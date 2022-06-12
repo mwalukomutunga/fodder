@@ -40,7 +40,6 @@ const Cart = () => {
     0
   );
 
-  // if (typeof window !== "undefined" && loading) return null;
   if (!session) {
     signIn();
   }
@@ -94,7 +93,7 @@ const Cart = () => {
                     <div className="card-body p-0 border-top">
                       <div className="osahan-cart">
                         {cart.map((post, index) => (
-                          <div className="cart-items bg-white position-relative border-bottom">
+                          <div key={index} className="cart-items bg-white position-relative border-bottom">
                             <a className="position-absolute">
                               <span className="badge badge-danger m-3">
                                 {post.discount}%

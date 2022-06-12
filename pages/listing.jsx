@@ -15,51 +15,50 @@ const Listing = () => {
     });
   }, []);
 
-  // if (typeof window !== "undefined" && loading) return null;
   if (!session) {
     signIn();
   }
   return (
-    <section class="py-4 osahan-main-body">
-      <div class="container">
-        <div class="row">
+    <section className="py-4 osahan-main-body">
+      <div className="container">
+        <div className="row">
           <AccountNav />
-          <div class="col-lg-8 p-4 bg-white rounded shadow-sm">
-            <div class="osahan-promos">
-              <h4 class="mb-4 profile-title">My Listings</h4>
+          <div className="col-lg-8 p-4 bg-white rounded shadow-sm">
+            <div className="osahan-promos">
+              <h4 className="mb-4 profile-title">My Listings</h4>
               {posts.map((post, index) => (
-                <div key={index} class="pb-3">
+                <div key={index} className="pb-3">
                   <a
                     href="promo_details.html"
-                    class="text-decoration-none text-white my-3"
+                    className="text-decoration-none text-white my-3"
                   >
-                    <div class="rounded bg-success shadow-sm p-3 text-white">
-                      <div class="row align-items-center">
-                        <div class="col-9">
-                          <div class="d-flex align-items-center">
+                    <div className="rounded bg-success shadow-sm p-3 text-white">
+                      <div className="row align-items-center">
+                        <div className="col-9">
+                          <div className="d-flex align-items-center">
                             <img
-                              class="pp-osahan-logo"
+                              className="pp-osahan-logo"
                               src="img/FPSK LOGO.jpg"
                             />
-                            <div class="brand ml-2">
-                              <h5 class="m-0">{post.description}</h5>
+                            <div className="brand ml-2">
+                              <h5 className="m-0">{post.description}</h5>
                             </div>
                           </div>
-                          <div class="mt-2 mb-3">
-                            <p class="text-white m-0">
+                          <div className="mt-2 mb-3">
+                            <p className="text-white m-0">
                               AVAILABLE {post.quantity} {post.discount}% OFF
                             </p>
                           </div>
                           <Link href="post">
-                            <a class="btn btn-outline-light btn-sm">
-                              <i class="icofont-sale-discount"></i> EDIT
+                            <a className="btn btn-outline-light btn-sm">
+                              <i className="icofont-sale-discount"></i> EDIT
                             </a>
                           </Link>
                         </div>
-                        <div class="col-3 text-center">
+                        <div className="col-3 text-center">
                           <Link href={`/productdetails/${post.id}`}>
                             <a>
-                              <img src={post.paths[0]} class="img-fluid" />
+                              <img src={post.paths[0]} className="img-fluid" />
                             </a>
                           </Link>
                         </div>

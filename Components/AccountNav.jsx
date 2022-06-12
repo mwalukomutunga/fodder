@@ -10,7 +10,7 @@ const AccountNav = () => {
     
 // }, [session]);
 // When rendering client side don't display anything until loading is complete
-// if (typeof window !== "undefined" && loading) return null;
+
     return (  
         <div className="col-lg-4">
         <div className="osahan-account bg-white rounded shadow-sm overflow-hidden">

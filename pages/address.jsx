@@ -19,7 +19,6 @@ const Address = () => {
      // setInputs({...inputs},{name:session?.user.name,phone:session?.user.name})
    }, [session]);
 
-//    if (typeof window !== "undefined" && loading) return null;
    if (!session) {
      signIn();
    }
@@ -35,7 +34,7 @@ const Address = () => {
                                 <div className="custom-control custom-radio px-0 mb-3 position-relative border-custom-radio">
                                     <input type="radio" id="customRadioInline1" name="customRadioInline1"
                                         className="custom-control-input" defaultChecked />
-                                    <label className="custom-control-label w-100" for="customRadioInline1">
+                                    <label className="custom-control-label w-100" htmlFor="customRadioInline1">
                                         <div>
                                             <div className="p-3 bg-white rounded shadow-sm w-100">
                                                 <div className="d-flex align-items-center mb-2">

@@ -5,8 +5,6 @@ import { useSession,signIn } from "next-auth/react";
 const Success = () => {
     const { data: session, status } = useSession();
     const loading = status === "loading";
-    
-  // if (typeof window !== "undefined" && loading) return null;
   if (!session) {
   signIn();
 }

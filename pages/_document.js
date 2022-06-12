@@ -26,7 +26,7 @@ class MyDocument extends Document {
         <body  className="dx-viewport fixed-bottom-padding">
           <Main />
           <NextScript />
-          <script 
+          <script defer
             src="/vendor/jquery/jquery.min.js"
             type="text/javascript"
           ></script>
@@ -34,19 +34,19 @@ class MyDocument extends Document {
             src="/vendor/bootstrap/js/bootstrap.bundle.min.js"
             type="text/javascript"
           ></script>
-          <script async
+          <script defer
             type="text/javascript"
             src="/vendor/slick/slick.min.js"
           ></script>
-          <script async
+          <script defer
             type="text/javascript"
             src="/vendor/sidebar/hc-offcanvas-nav.js"
           ></script>
-          <script async src="/js/osahan.js" type="text/javascript"></script>
+          <script defer src="/js/osahan.js" type="text/javascript"></script>
 
-          <script async src="/js/rocket-loader.min.js"></script>
+          <script defer src="/js/rocket-loader.min.js"></script>
           <script
-            async
+            defer
             src="https://static.cloudflareinsights.com/beacon.min.js"
           ></script>
         </body>
