@@ -12,15 +12,16 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+       
         <title>Fodder trading platform | farmers</title>
+      
+        {/* <link href="/vendor/sidebar/demo.css" type="text/css" rel="stylesheet"></link> */}
+      </Head>
+      <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" type="text/css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="/vendor/slick/slick.min.css" />
         <link rel="stylesheet" type="text/css" href="/vendor/slick/slick-theme.min.css" />
         <link href="/vendor/icons/icofont.min.css" rel="stylesheet" type="text/css" />
-        <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="/css/style.css" type="text/css" rel="stylesheet" />
-        {/* <link href="/vendor/sidebar/demo.css" type="text/css" rel="stylesheet"></link> */}
-      </Head>
       {/* <Script 
             src="/vendor/jquery/jquery.min.js"
             type="text/javascript"
