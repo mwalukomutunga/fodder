@@ -7,20 +7,6 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
   reactStrictMode: true,
-  distDir: 'build',
-  exportPathMap: async function (
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
-    return {
-      '/': { page: '/' },
-      '/invoice': { page: '/invoice' },
-      '/account': { page: '/account' },
-      '/myorders': { page: '/myorders' },
-      '/post': { page: '/post' },
-     
-    }
-  },
 }
 
 module.exports = nextConfig
