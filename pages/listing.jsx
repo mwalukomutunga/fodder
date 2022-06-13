@@ -9,15 +9,17 @@ const Listing = () => {
   const [posts, setPosts] = useState([]);
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  
   useEffect(() => {
     requests.get("/posts").then((res) => {
       setPosts(res.slice(1, 3));
     });
-  }, []);
+    if (!session) {
+      signIn();
+    }
+  }, [session]);
 
-  if (!session) {
-    signIn();
-  }
+ 
   return (
     <section className="py-4 osahan-main-body">
       <div className="container">

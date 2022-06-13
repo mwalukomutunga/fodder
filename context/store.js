@@ -25,7 +25,7 @@ const reHydrateStore = () => {
 //STORE CONFIGURATION
 const store = configureStore({
   reducer,
-  preloadedState: reHydrateStore(),
+  preloadedState:reHydrateStore() ,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(localStorageMiddleware),
 });

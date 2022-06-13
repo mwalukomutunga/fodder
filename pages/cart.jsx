@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import {
   incrementQuantity,
   decrementQuantity,
@@ -15,38 +15,45 @@ import requests from "../agent";
 // Reference to the dispatch function from redux store
 
 const Cart = () => {
-   const [address,setAddress] = useState({});
-   const [inputs, setInputs] = useState();
+  const [address, setAddress] = useState({});
+  const [inputs, setInputs] = useState();
   const { data: session, status } = useSession();
   const loading = status === "loading";
   const router = useRouter();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    requests.get("location/" + session?.user.name).then((res) => {
-      setAddress(res)
-    });
-    setInputs((inputs) => ({ ...inputs, name:session?.user.name,phone:session?.user.name}));
-    // setInputs({...inputs},{name:session?.user.name,phone:session?.user.name})
+    if (session?.user.name) {
+      requests.get("location/" + session?.user.name).then((res) => {
+        setAddress(res);
+      });
+      setInputs((inputs) => ({
+        ...inputs,
+        name: session?.user.name,
+        phone: session?.user.name,
+      }));
+    }
+    if (!session) {
+      signIn();
+    }
   }, [session]);
 
   let total = cart.reduce(
-    (accumulator, post) => (post.unitPrice * post.quantity)+accumulator,
+    (accumulator, post) => post.unitPrice * post.quantity + accumulator,
     0
   );
   let discounted = cart.reduce(
-    (accumulator, post) =>accumulator+
-     (post.unitPrice * ((100 - post.discount) / 100) * post.quantity),
+    (accumulator, post) =>
+      accumulator +
+      post.unitPrice * ((100 - post.discount) / 100) * post.quantity,
     0
   );
 
-  if (!session) {
-    signIn();
-  }
   const HandleSubmit = () => {
-    requests.put("Address", inputs).then(res =>{
-      setAddress(res)
-     router.reload();
+    requests.put("Address", inputs).then((res) => {
+      setAddress(res);
+      router.reload();
     });
   };
   const handleInputChange = (event) => {
@@ -93,7 +100,10 @@ const Cart = () => {
                     <div className="card-body p-0 border-top">
                       <div className="osahan-cart">
                         {cart.map((post, index) => (
-                          <div key={index} className="cart-items bg-white position-relative border-bottom">
+                          <div
+                            key={index}
+                            className="cart-items bg-white position-relative border-bottom"
+                          >
                             <a className="position-absolute">
                               <span className="badge badge-danger m-3">
                                 {post.discount}%
@@ -140,7 +150,10 @@ const Cart = () => {
                                     <input
                                       type="text"
                                       name="quantity"
-                                      value={cart.find((x) => x.id == post.id)?.quantity}
+                                      value={
+                                        cart.find((x) => x.id == post.id)
+                                          ?.quantity
+                                      }
                                       className="qty form-control"
                                     />
                                     <input
@@ -220,55 +233,56 @@ const Cart = () => {
                     aria-labelledby="headingtwo"
                     data-parent="#accordionExample"
                   >
-                 {address &&   <div className="card-body p-0 border-top">
-                      <div className="osahan-order_address">
-                        <div className="p-3 row">
-                          <div className="custom-control col-lg-12 custom-radio mb-6 position-relative border-custom-radio">
-                            <div className="p-3 bg-white rounded shadow-sm w-200">
-                              <div className="d-flex align-items-center mb-2">
-                                <p className="mb-0 h6">Home</p>
-                                <p className="mb-0 badge badge-success ml-auto">
-                                  <i className="icofont-check-circled"></i>{" "}
-                                  Default
+                    {address && (
+                      <div className="card-body p-0 border-top">
+                        <div className="osahan-order_address">
+                          <div className="p-3 row">
+                            <div className="custom-control col-lg-12 custom-radio mb-6 position-relative border-custom-radio">
+                              <div className="p-3 bg-white rounded shadow-sm w-200">
+                                <div className="d-flex align-items-center mb-2">
+                                  <p className="mb-0 h6">Home</p>
+                                  <p className="mb-0 badge badge-success ml-auto">
+                                    <i className="icofont-check-circled"></i>{" "}
+                                    Default
+                                  </p>
+                                </div>
+                                <p className="small text-muted m-0">
+                                  {address?.homeAddress}
+                                </p>
+                                <p className="small text-muted m-0">
+                                  {address?.completeAddress}
+                                </p>
+                                <p className="pt-2 m-0 text-right">
+                                  <span className="small">
+                                    <a
+                                      href="cart.html#"
+                                      data-toggle="modal"
+                                      data-target="#exampleModal"
+                                      className="text-decoration-none text-info"
+                                    >
+                                      Edit
+                                    </a>
+                                  </span>
                                 </p>
                               </div>
-                              <p className="small text-muted m-0">
-                                {address?.homeAddress}
-                              </p>
-                              <p className="small text-muted m-0">
-                               {address?.completeAddress}
-                              </p>
-                              <p className="pt-2 m-0 text-right">
-                                <span className="small">
-                                  <a
-                                    href="cart.html#"
-                                    data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    className="text-decoration-none text-info"
-                                  >
-                                    Edit
-                                  </a>
-                                </span>
-                              </p>
                             </div>
-                          </div>
 
-                          <Link href="/success">
-                            <a
-                              className="btn btn-success btn-lg btn-block mt-3"
-                              type="button"
-                              data-toggle="collapse"
-                              data-target="#collapsethree"
-                              aria-expanded="true"
-                              aria-controls="collapsethree"
-                            >
-                              Place order
-                            </a>
-                          </Link>
+                            <Link href="/success">
+                              <a
+                                className="btn btn-success btn-lg btn-block mt-3"
+                                type="button"
+                                data-toggle="collapse"
+                                data-target="#collapsethree"
+                                aria-expanded="true"
+                                aria-controls="collapsethree"
+                              >
+                                Place order
+                              </a>
+                            </Link>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    }
+                    )}
                   </div>
                 </div>
               </div>
@@ -278,7 +292,7 @@ const Cart = () => {
                 <div className="bg-white rounded overflow-hidden shadow-sm mb-3 checkout-sidebar">
                   <div className="d-flex align-items-center osahan-cart-item-profile border-bottom bg-white p-3">
                     <img
-                      alt="osahan"                     
+                      alt="osahan"
                       src="/img/FPSK LOGO.jpg"
                       className="mr-3 rounded-circle img-fluid"
                     />
@@ -377,8 +391,8 @@ const Cart = () => {
                       <input
                         placeholder="Delivery Area"
                         type="text"
-                        name ="homeAddress"
-                         onChange={handleInputChange}
+                        name="homeAddress"
+                        onChange={handleInputChange}
                         className="form-control"
                       />
                       <div className="input-group-append">
@@ -397,7 +411,7 @@ const Cart = () => {
                     <input
                       placeholder="Complete Address e.g. house number, street name, landmark"
                       type="text"
-                      name ="completeAddress"
+                      name="completeAddress"
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -405,8 +419,8 @@ const Cart = () => {
                   <div className="col-md-12 form-group">
                     <label className="form-label">Delivery Instructions</label>
                     <input
-                    name ="deliveryInstructions"
-                    onChange={handleInputChange}
+                      name="deliveryInstructions"
+                      onChange={handleInputChange}
                       placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall"
                       type="text"
                       className="form-control"
@@ -449,7 +463,8 @@ const Cart = () => {
                 </button>
               </div>
               <div className="col-6 m-0 p-0">
-                <button onClick={()=>HandleSubmit()}
+                <button
+                  onClick={() => HandleSubmit()}
                   type="button"
                   className="btn btn-success btn-lg btn-block"
                 >

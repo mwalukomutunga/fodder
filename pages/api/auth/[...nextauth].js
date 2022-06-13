@@ -1,6 +1,5 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
-let user ={ id: 1, name: "J Smith", email: "jsmith@example.com" };
 export default NextAuth({
 providers: [
   CredentialsProvider({
@@ -16,7 +15,7 @@ providers: [
     },
     async authorize(credentials, req) {
       // Add logic here to look up the user from the credentials supplied
-      return await fetch("http://localhost:7065/api/token", {
+      return await fetch("http://fodder.fpsk.co.ke/api/token", {
         method: 'POST',
         body: JSON.stringify(credentials),
         headers: { "Content-Type": "application/json" }
@@ -26,4 +25,6 @@ providers: [
     }
   })
 ],
+secret: "12345678",
+NEXTAUTH_URL:'http://fodder.fpsk.co.ke/'
 })

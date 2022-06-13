@@ -17,11 +17,12 @@ const Address = () => {
      });
      setInputs((inputs) => ({ ...inputs, name:session?.user.name,phone:session?.user.name}));
      // setInputs({...inputs},{name:session?.user.name,phone:session?.user.name})
+     if (!session) {
+        signIn();
+      }
    }, [session]);
 
-   if (!session) {
-     signIn();
-   }
+  
     return (
         <>
             <section className="py-4 osahan-main-body">

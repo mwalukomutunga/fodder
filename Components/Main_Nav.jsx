@@ -224,7 +224,7 @@ const MainNav = () => {
               </Link>
             )}
             {!session && (
-              <Link href="picks_today.html">
+              <Link href="">
                 <a onClick={() => signIn()} className="text-white px-3 py-2">
                   Login
                 </a>

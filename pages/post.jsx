@@ -4,12 +4,15 @@ import requests from "../agent";
 import { useRouter } from "next/router";
 import Select from "react-select";
 import AccountNav from "../Components/AccountNav";
+import { useSession, signIn } from "next-auth/react";
 
 const Post = () => {
   var router = useRouter();
   const [counties, setCounties] = useState([]);
   const [subCounties, setSubCounties] = useState([]);
   const [wards, setWards] = useState([]);
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
   const [inputs, setInputs] = useState({
     county: "Makueni",
     address: "Nairobi,Kenya",
@@ -32,7 +35,7 @@ const Post = () => {
     requests.get("Administration").then((res) => {
       setCounties(res);
     });
-    // setInputs((inputs) => ({ ...inputs, name:session?.user.name,phone:session?.user.name}));
+     setInputs((inputs) => ({ ...inputs, name:session?.user.name,phone:session?.user.name}));
   }, []);
 
   const typeOptions = [
@@ -128,11 +131,11 @@ const Post = () => {
                       className="form-control"
                       name="fullname"
                       required
-                      value={inputs.fullname}
+                      value={inputs.name}
                       onChange={handleInputChange}
                     />
-                  </div> */}
-                  {/* <div className="form-group">
+                  </div>
+                  <div className="form-group">
                     <label>Mobile Number</label>
                     <input
                       type="tel"

@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
   distDir: 'build',
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -15,7 +14,6 @@ const nextConfig = {
   ) {
     return {
       '/': { page: '/' },
-      '/about': { page: '/about' },
       '/invoice': { page: '/invoice' },
       '/account': { page: '/account' },
       '/myorders': { page: '/myorders' },
